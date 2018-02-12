@@ -5,7 +5,7 @@ import {
 } from './fetch';
 import url_config from "./url_config";
 
-export const getBikes = () => fetch(
+export const getTopbikes = () => fetch(
     `${url_config.url}/getTopfive`,
     {
         headers: getFullHeader(),
@@ -19,7 +19,7 @@ export const getAllBikes = () => fetch(
     }
 ).then(fetchMiddleware);
 
-export const getItem = (id) => fetch(
+export const getBike = (id) => fetch(
     `${url_config.url}/products/${ id }`,
     {
         headers: getFullHeader(),

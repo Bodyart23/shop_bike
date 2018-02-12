@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getItem} from "../../api";
+import {getBike} from "../../api";
 import Loader from '../../components/Loader';
 
 class Product extends Component{
@@ -12,7 +12,7 @@ class Product extends Component{
         const href = window.location.href;
         const id = href.split('?id=')[1];
         if (id) {
-            getItem(id).then(data => {
+            getBike(id).then(data => {
                 this.setState({
                     itemObj: data
                 });
@@ -30,12 +30,13 @@ class Product extends Component{
     }
 
     render(){
+        const { goTo } = this.props;
         if (!this.isMount) {
             return <Loader show={ true }/>;
         }
         const {itemObj} = this.state;
         return(
-            <div>
+            <div className="container" >
                 <div>
                     <div>
                         <img src={ 'data:image/gif;base64,' + itemObj.productPhotos[0].largePhoto } alt={ itemObj.name }/>
@@ -55,7 +56,11 @@ class Product extends Component{
                         </ul>
                     </div>
                 </div>
-            </div>
+                <div>
+                <button className="button-close" onClick={() => goTo('/main')}>Close</button>
+                </div>
+                </div>
+
         );
 
     }

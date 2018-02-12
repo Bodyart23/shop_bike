@@ -3,7 +3,7 @@
     letter-spacing: 1px;
     height: 8em;
     padding: 0em 5%;
-    background: #2c3e50;
+    background: #4033ff;
     color: #ffe600;
 }
 .font {
@@ -15,12 +15,12 @@
     font-style: italic;
 }
 .background{
-    background-color: #3affa2;
+    background-color: #686664;
 }
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
     min-width: 1000px;
-    background-color: #3affa2;
+    background-color: #686664;
 }

@@ -1,0 +1,17 @@
+
+.font {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    font-variant:  contextual;
+    font-family: Snell Roundhand, serif;
+    font-style: italic;
+}
+.background{
+    background-color: #686664;
+}
+.button-close{
+    width: 100px;
+    padding: 15px;
+    border-radius: 10px;
+}

@@ -22,35 +22,27 @@
     text-align: center;
     line-height: normal;
 
-    /* эмуляция inline-block для IE6-7*/
-/*display : inline;
-//zoom : 1;*/
 }
-
-.button7{
-    padding: 0.5em;
-    margin: 0;
-    font-weight: normal;
-    border-bottom: 1px solid #ddd;
-    background-color: #f3f3f3
+.button-search{
+    width: 100px;
+    padding: 15px;
+    border-radius: 10px;
 }
-
-.button8 {
-    padding: 1em
-}
-
-.button9 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 150px;
-    margin-top: 3px !important;
-    z-index: 2002;
+.rounded {
+    width: 450px;
+    padding: 15px;
+    margin: 50px auto 50px auto;
+    background: #444;
     background: white;
-    -webkit-column-gap: 8px;
-    -moz-column-gap: 8px;
-    -ms-column-gap: 8px;
-    -o-column-gap: 8px;
-    column-gap: 8px
+    border-radius: 10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
+}
+.font-card {
+    text-align: justify;
+    letter-spacing: 1px;
+    height: 8em;
+    padding: 0em 5%;
+    background: #686664;
+    color: #ffe600;
 }
 
