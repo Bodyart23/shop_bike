@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getAllBikes, getTopbike,getSearchCount} from "../../api";
+import {getAllBikes, getTopbike, getSearchCount} from "../../api";
 import Loader from '../../components/Loader';
 import './styles.css';
 import Link from "react-router-dom/es/Link";
@@ -47,14 +47,13 @@ class Main extends Component {
         this.setState({
             loading: true
         });
-
-        const { count } = this.state;
+        const {count} = this.state;
         if (this.searchInput.value === '') {
             alert('Fill in the field');
             this.setState({
                 loading: false
             });
-            return  ;
+            return;
         }
         getSearchCount(this.searchInput.value, countSerch ? countSerch : 0).then(data => {
             this.setState({
@@ -72,7 +71,7 @@ class Main extends Component {
     };
 
     render() {
-        const { data,searchResult,  loading } = this.state;
+        const {data, searchResult, loading} = this.state;
 
 
         if (loading) {
@@ -91,45 +90,54 @@ class Main extends Component {
                     />
                     <button
                         className="button-search"
-                        onClick={ () => this.searchBtnHandler() }
-                    >Search</button>
+                        onClick={() => this.searchBtnHandler()}
+                    >Search
+                    </button>
                 </div>
                 <div> {
                     data && !searchResult ?
-                    data.map((el, index) => {
-                        return (
-                            <div className="content"
-                                 key={ index }>
-                            <div className="card">
-                                <div>
-                                    <img src={'data:image/gif;base64,' + el.productPhotos[0].largePhoto} alt={el.name}/>
-                                </div>
-                                <div>
-                                    <Link to={('/product?id=' + el.id)}> <a className="font-card"> <span>{el.name}</span></a></Link>
-                                    <div>
-                                        <span ><b>Price: {el.listPrice}</b></span>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        );
-                    }): (searchResult.length > 0 && !data ? searchResult.map((el, index) => {
-                            return(
-                                <div
-
-                                    className="content"
-                                    key={ index }
-                                >
-                                    <img src={ 'data:image/gif;base64,' + el.productPhotos[0].largePhoto } alt={ el.name } />
-                                    <div>
-                                        <Link to={('/product?id=' + el.id)}> <a className="font-card"> <span>{el.name}</span></a></Link>
-                                        <div> <span >Price: {el.listPrice}</span>
-                                        </div>
+                        data.map((el, index) => {
+                            return (
+                                <div className="content"
+                                     key={index}>
+                                    <div className="card">
+                                        <Link to={('/product?id=' + el.id)}>
+                                            <div>
+                                                <img src={'data:image/gif;base64,' + el.productPhotos[0].largePhoto}
+                                                     alt={el.name}/>
+                                            </div>
+                                            <div>
+                                                <a className="font-card"> <span>{el.name}</span></a>
+                                            </div>
+                                        </Link>
+                                        <div>
+                                            <span><b>Price: {el.listPrice}</b></span>
                                         </div>
                                     </div>
+                                </div>
+                            );
+                        }) : (searchResult.length > 0 && !data ? searchResult.map((el, index) => {
+                            return (
+                                <div className="content"
+                                     key={index}>
+                                    <div className="card">
+                                        <Link to={('/product?id=' + el.id)}>
+                                            <div>
+                                                <img src={'data:image/gif;base64,' + el.productPhotos[0].largePhoto}
+                                                     alt={el.name}/>
+                                            </div>
+                                            <div>
+                                                <a className="font-card"> <span>{el.name}</span></a>
+                                            </div>
+                                        </Link>
+                                        <div>
+                                            <span><b>Price: {el.listPrice}</b></span>
+                                        </div>
+                                    </div>
+                                </div>
                             )
                         }) : <div>No data find...</div>)
-                    }
+                }
                 </div>
                 {
                     loading && <Loader show={true}/>
