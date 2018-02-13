@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {getBike} from "../../api";
 import Loader from '../../components/Loader';
-
+import './styles.css';
+import Link from "react-router-dom/es/Link";
 class Product extends Component{
     state = {
         loading: true,
@@ -20,8 +21,6 @@ class Product extends Component{
                 console.log('error', err);
             });
             this.isMount = true;
-        } else {
-            this.props.goTo('/');
         }
     }
 
@@ -30,13 +29,13 @@ class Product extends Component{
     }
 
     render(){
-        const { goTo } = this.props;
+
         if (!this.isMount) {
             return <Loader show={ true }/>;
         }
         const {itemObj} = this.state;
         return(
-            <div className="container" >
+            <div className="container-product" >
                 <div>
                     <div>
                         <img src={ 'data:image/gif;base64,' + itemObj.productPhotos[0].largePhoto } alt={ itemObj.name }/>
@@ -57,7 +56,7 @@ class Product extends Component{
                     </div>
                 </div>
                 <div>
-                <button className="button-close" onClick={() => goTo('/main')}>Close</button>
+                    <Link to={('/main')}><button className="button-close-product" >Close</button></Link>
                 </div>
                 </div>
 

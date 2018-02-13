@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {getAllBikes, getTopbike,getSearchCount} from "../../api";
 import Loader from '../../components/Loader';
 import './styles.css';
+import Link from "react-router-dom/es/Link";
 
 class Main extends Component {
     constructor(props) {
@@ -19,53 +20,48 @@ class Main extends Component {
                 data: data,
                 loading: false
             });
-            this.isMount = true;
         }).catch(err => {
             this.setState({
                 loading: false
             });
             console.log(err);
         });
-        this.isMount = true;
     }
 
-    componentDidMountALL() {
+    loadAllBikes() {
         getAllBikes().then(data => {
             this.setState({
                 data: data,
                 loading: false
             });
-            this.isMount = true;
         }).catch(err => {
             this.setState({
                 loading: false
             });
             console.log(err);
         });
-        this.isMount = true;
     }
 
-    componentWillUnmount() {
-        this.isMount = false;
-    }
-    searchBtnHandler = (btnCount) => {
+
+    searchBtnHandler = (countSerch) => {
         this.setState({
             loading: true
         });
+
         const { count } = this.state;
         if (this.searchInput.value === '') {
             alert('Fill in the field');
             this.setState({
                 loading: false
             });
-            return;
+            return  ;
         }
-        getSearchCount(this.searchInput.value, btnCount ? btnCount : 0).then(data => {
+        getSearchCount(this.searchInput.value, countSerch ? countSerch : 0).then(data => {
             this.setState({
                 searchResult: data,
                 data: null,
                 loading: false,
-                count: btnCount ? count + 1 : 0
+                count: countSerch ? count + 1 : 0
             });
         }).catch(err => {
             this.setState({
@@ -77,9 +73,9 @@ class Main extends Component {
 
     render() {
         const { data,searchResult,  loading } = this.state;
-        const { goTo } = this.props;
 
-        if (!this.isMount) {
+
+        if (loading) {
             return <Loader show={true}/>;
         }
 
@@ -103,29 +99,30 @@ class Main extends Component {
                     data.map((el, index) => {
                         return (
                             <div className="content"
-                                 key={index}
-                                 onClick={() => goTo('/product', el.id)}>
+                                 key={ index }>
+                            <div className="card">
                                 <div>
                                     <img src={'data:image/gif;base64,' + el.productPhotos[0].largePhoto} alt={el.name}/>
                                 </div>
                                 <div>
-                                    <a className="font-card"> <span>{el.name}</span></a>
+                                    <Link to={('/product?id=' + el.id)}> <a className="font-card"> <span>{el.name}</span></a></Link>
                                     <div>
                                         <span ><b>Price: {el.listPrice}</b></span>
                                     </div>
                                 </div>
                             </div>
+                            </div>
                         );
                     }): (searchResult.length > 0 && !data ? searchResult.map((el, index) => {
                             return(
                                 <div
-                                    onClick={ () => goTo('/product', el.id) }
+
                                     className="content"
                                     key={ index }
                                 >
                                     <img src={ 'data:image/gif;base64,' + el.productPhotos[0].largePhoto } alt={ el.name } />
                                     <div>
-                                        <a> <span>{ el.name }</span></a>
+                                        <Link to={('/product?id=' + el.id)}> <a className="font-card"> <span>{el.name}</span></a></Link>
                                         <div> <span >Price: {el.listPrice}</span>
                                         </div>
                                         </div>
@@ -137,7 +134,7 @@ class Main extends Component {
                 {
                     loading && <Loader show={true}/>
                 }
-                <button className="button" onClick={() => this.componentDidMountALL()}>GetAll</button>
+                <button className="button" onClick={() => this.loadAllBikes()}>GetAll</button>
             </div>
 
         )

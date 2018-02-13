@@ -1,4 +1,11 @@
-
+.header {
+    text-align: justify;
+    letter-spacing: 1px;
+    height: 8em;
+    padding: 0em 5%;
+    background: #4033ff;
+    color: #ffe600;
+}
 .font {
     display: inline-block;
     vertical-align: middle;
