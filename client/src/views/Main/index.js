@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {getAllBikes, getTopbike, getSearchCount} from "../../api";
 import Loader from '../../components/Loader';
 import './styles.css';
-import Link from "react-router-dom/es/Link";
+import Card from "../../components/Card";
 
 class Main extends Component {
     constructor(props) {
@@ -100,40 +100,14 @@ class Main extends Component {
                             return (
                                 <div className="content"
                                      key={index}>
-                                    <div className="card">
-                                        <Link to={('/product?id=' + el.id)}>
-                                            <div>
-                                                <img src={'data:image/gif;base64,' + el.productPhotos[0].largePhoto}
-                                                     alt={el.name}/>
-                                            </div>
-                                            <div>
-                                                <a className="font-card"> <span>{el.name}</span></a>
-                                            </div>
-                                        </Link>
-                                        <div>
-                                            <span><b>Price: {el.listPrice}</b></span>
-                                        </div>
-                                    </div>
+                                    <Card el={el}/>
                                 </div>
                             );
                         }) : (searchResult.length > 0 && !data ? searchResult.map((el, index) => {
                             return (
                                 <div className="content"
                                      key={index}>
-                                    <div className="card">
-                                        <Link to={('/product?id=' + el.id)}>
-                                            <div>
-                                                <img src={'data:image/gif;base64,' + el.productPhotos[0].largePhoto}
-                                                     alt={el.name}/>
-                                            </div>
-                                            <div>
-                                                <a className="font-card"> <span>{el.name}</span></a>
-                                            </div>
-                                        </Link>
-                                        <div>
-                                            <span><b>Price: {el.listPrice}</b></span>
-                                        </div>
-                                    </div>
+                                    <Card el={el}/>
                                 </div>
                             )
                         }) : <div>No data find...</div>)
