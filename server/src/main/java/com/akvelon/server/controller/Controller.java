@@ -1,5 +1,6 @@
 package com.akvelon.server.controller;
 
+import com.akvelon.server.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.akvelon.server.models.Product;
@@ -11,7 +12,7 @@ import java.util.List;
 @RestController
 public class Controller {
     @Autowired
-    private IproductService iproductService;
+    private ProductService productService;
 
     @Autowired
     @CrossOrigin(value = "*")
@@ -23,38 +24,38 @@ public class Controller {
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/getAll")
     public List<Product> getAll() {
-        return iproductService.getAll();
+        return productService.getAll();
     }
 
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/products/{id}")
     public Product getProduct(@PathVariable Integer id) {
-        return iproductService.read(id);
+        return productService.read(id);
     }
 
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/getTopfive")
     public List<Product> getTopfive() {
-        return iproductService.getTopfive();
+        return productService.getTopfive();
     }
 
     @CrossOrigin(value = "*")
-    @RequestMapping(value = "/delete/{key}")
-    public Integer delete(@PathVariable Integer key) {
-      return iproductService.delete(key);
+    @RequestMapping(value = "/products/delete/{productID}")
+    public Integer delete(@PathVariable ("productID") Integer productID) {
+      return productService.delete(productID);
 
     }
 
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/products/create")
     public Integer create(@RequestBody Product product) throws SQLException {
-        return iproductService.create(product);
+        return productService.create(product);
     }
 
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/products/update")
     public Integer update(@RequestBody Product product) throws SQLException {
-        iproductService.update(product);
+        productService.update(product);
         return product.getId();
 
     }
@@ -62,6 +63,6 @@ public class Controller {
     @CrossOrigin(value = "*")
     @RequestMapping(value = "/search/{searchRequest}/{count}")
     public List<Product> searchProduct(@PathVariable("searchRequest") String searchRequest, @PathVariable("count") Integer count) {
-        return iproductService.searchProduct(searchRequest, count);
+        return productService.searchProduct(searchRequest, count);
     }
 }

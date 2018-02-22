@@ -44,7 +44,7 @@ private V obj;
 
         jdbcTemplate.update((con) -> createInsertStatement(con, value), keyHolder);
         int id = keyHolder.getKey().intValue();
-        value.setId(id);
+        setId(value, keyHolder);
 
         return id;
     }
@@ -82,7 +82,7 @@ private V obj;
 
         return jdbcTemplate.query(sql, new Object[]{value}, getRowMapper());
     }
-
+    protected abstract void setId(V value, KeyHolder keyHolder);
     protected abstract RowMapper getRowMapper();
 
     protected abstract PreparedStatement createInsertStatement( Connection connection, V value) throws SQLException;

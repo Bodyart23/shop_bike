@@ -3,12 +3,14 @@ package com.akvelon.server.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.akvelon.server.models.Product;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import com.akvelon.server.models.ProductPhoto;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class ProductIntDao extends AbsIntDao<Product> implements IproductDao {
@@ -18,9 +20,7 @@ public class ProductIntDao extends AbsIntDao<Product> implements IproductDao {
     private static RowMapper<Product> rowMapper;
 
 
-    private final String INSERT = "INSERT INTO product(Name,ProductNumber,makeFlag,FinishedGoodsFlag,Color,SafetyStockLevel," +
-            "ReorderPoint,StandardCost,ListPrice,Size,SizeUnitMeasureCode,WeightUnitMeasureCode,Weight,DaysToManufacture," +
-            "ProductLine,Style,rowguid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private final String INSERT = "INSERT INTO product (Name, ProductNumber, MakeFlag, FinishedGoodsFlag, Color, SafetyStockLevel, ReorderPoint, StandardCost, ListPrice, Size, SizeUnitMeasureCode, WeightUnitMeasureCode, Weight, DaysToManufacture, ProductLine, Class, Style, ProductSubcategoryID, ProductModelID, SellStartDate, SellEndDate, DiscontinuedDate, rowguid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE Name = Name";
     private final String UPDATE = "UPDATE product SET Name=?,ProductNumber=?,makeFlag=?,FinishedGoodsFlag=?,Color=?,SafetyStockLevel=?," +
             "ReorderPoint=?,StandardCost=?,ListPrice=?,Size=?,SizeUnitMeasureCode=?,WeightUnitMeasureCode=?,Weight=?,DaysToManufacture=?," +
             "ProductLine=?,Style=?,ProductSubcategoryID=?,ProductModelID=?,rowguid=? WHERE ProductID=?";
@@ -81,7 +81,10 @@ public class ProductIntDao extends AbsIntDao<Product> implements IproductDao {
         }
         return productIntDao;
     }
-
+    @Override
+    protected void setId(Product value, KeyHolder keyHolder) {
+        value.setId(keyHolder.getKey().intValue());
+    }
     @Override
     public List<Product> getTopfive() {
         return jdbcTemplate.query(GET_TOP_FIVE, getRowMapper());
@@ -104,7 +107,7 @@ public class ProductIntDao extends AbsIntDao<Product> implements IproductDao {
     protected PreparedStatement createInsertStatement(Connection connection, Product value) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
         int i = 0;
-        ps.setInt(++i, value.getId());
+//        ps.setInt(++i, value.getId());
         ps.setString(++i, value.getName());
         ps.setString(++i, value.getProductNumber());
         ps.setBoolean(++i, value.getMakeFlag());
@@ -124,10 +127,10 @@ public class ProductIntDao extends AbsIntDao<Product> implements IproductDao {
         ps.setString(++i, value.getProductClass());
         ps.setInt(++i, value.getProductSubcategoryID());
         ps.setInt(++i, value.getProductModelID());
-        ps.setDate(++i, (Date) value.getSellStartDate());
-        ps.setDate(++i, (Date) value.getSellEndDate());
-        ps.setDate(++i, (Date) value.getDiscontinuedDate());
-        ps.setString(++i, value.getRowguid());
+        ps.setDate(++i,  value.getSellStartDate());
+        ps.setDate(++i,  value.getSellEndDate());
+        ps.setDate(++i,  value.getDiscontinuedDate());
+        ps.setString(++i, UUID.randomUUID().toString().toUpperCase());
         return ps;
     }
 
@@ -155,9 +158,9 @@ public class ProductIntDao extends AbsIntDao<Product> implements IproductDao {
         ps.setString(++i, value.getProductClass());
         ps.setInt(++i, value.getProductSubcategoryID());
         ps.setInt(++i, value.getProductModelID());
-        ps.setDate(++i, (Date) value.getSellStartDate());
-        ps.setDate(++i, (Date) value.getSellEndDate());
-        ps.setDate(++i, (Date) value.getDiscontinuedDate());
+        ps.setDate(++i,  value.getSellStartDate());
+        ps.setDate(++i,  value.getSellEndDate());
+        ps.setDate(++i,  value.getDiscontinuedDate());
         ps.setString(++i, value.getRowguid());
         return ps;
     }

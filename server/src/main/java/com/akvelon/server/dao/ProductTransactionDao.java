@@ -3,6 +3,7 @@ package com.akvelon.server.dao;
 
 import com.akvelon.server.models.TransactionHistory;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -45,7 +46,10 @@ public class ProductTransactionDao extends AbsIntDao<TransactionHistory> impleme
         return productTransactionDao;
     }
 
-
+    @Override
+    protected void setId(TransactionHistory value, KeyHolder keyHolder) {
+        value.setId(keyHolder.getKey().intValue());
+    }
     @Override
     protected RowMapper getRowMapper() {
         return rowMapper;

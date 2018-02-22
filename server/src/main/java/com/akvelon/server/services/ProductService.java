@@ -1,5 +1,6 @@
 package com.akvelon.server.services;
 
+import com.akvelon.server.dao.ProductPhotoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.akvelon.server.dao.ProductIntDao;
@@ -13,6 +14,9 @@ import java.util.List;
 public class ProductService implements IproductService {
     @Autowired
     private ProductIntDao productIntDao;
+    @Autowired
+    private ProductPhotoDao productPhotoDao;
+
 
 
     @Override

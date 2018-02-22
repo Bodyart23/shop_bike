@@ -3,14 +3,13 @@ package com.akvelon.server.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 public class Product extends Entity<Integer> {
-    private Integer ProductID;
     private String Name;
     private String ProductNumber;
     private Boolean MakeFlag;
