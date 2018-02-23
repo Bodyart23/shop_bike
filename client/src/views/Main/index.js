@@ -80,7 +80,7 @@ class Main extends Component {
 
 
         return (
-            <div className="container">
+            <div className="container-main">
                 <div>
                     <input
                         className="rounded"
@@ -111,6 +111,7 @@ class Main extends Component {
                                 </div>
                             )
                         }) : <div>No data find...</div>)
+
                 }
                 </div>
                 {

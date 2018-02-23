@@ -33,6 +33,7 @@ class Product extends Component {
     componentWillUnmount() {
         this.isMount = false;
     }
+
     submit = (obj) => {
         updateBike(obj).then(data => {
             if (data) {
@@ -73,7 +74,7 @@ class Product extends Component {
         }
         const {itemObj} = this.state;
         return (
-            <div className="container-product">
+            <div className="container">
                 <div>
                     <div>
                         <img src={'data:image/gif;base64,' + itemObj.productPhotos[0].largePhoto} alt={itemObj.name}/>
@@ -101,13 +102,13 @@ class Product extends Component {
                         <button
                             style={{marginRight: '15px'}}
                             onClick={() => this.setState({dialogVisibility: true})}
-                            blue
                         >
-                            Update</button>
+                            Update
+                        </button>
                         <button
                             onClick={() => this.setState({removeModalVisibility: true})}
-                            red
-                        >Remove</button>
+                        >Remove
+                        </button>
                     </div>
                     <Dialog
                         className='form-dialog'
@@ -138,12 +139,10 @@ class Product extends Component {
                                 Yes
                             </button>
                             <button onClick={() => this.setState({removeModalVisibility: false})}
-                            >No</button>
+                            >No
+                            </button>
                         </div>
                     </Dialog>
-                    <Link to={('/main')}>
-                        <button className="button-close-product">Close</button>
-                    </Link>
                 </div>
             </div>
 

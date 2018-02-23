@@ -466,7 +466,8 @@ class Form extends Component {
             discontinuedDate,
         } = this.state;
         return (
-            <form className='main-form'>
+            <form className='main-form' >
+                <div className="container">
                 <div>
                     <div className="row">
                         <label htmlFor="name">Name:</label>
@@ -825,6 +826,7 @@ class Form extends Component {
                     onClick={ () => this.validate('submit') }
                 >Submit
                 </button>
+                </div>
             </form>
         )
     }

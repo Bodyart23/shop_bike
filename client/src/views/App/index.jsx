@@ -11,13 +11,19 @@ class App extends Component {
             <div className="background">
                 <header className="header">
                     <div className="font">
+
                         <h1>BEST BIKES</h1>
                         {
                             !window.location.href.includes('create') &&
                             <Link to={('/create')}>
                                 <button className="button-close-product">Add new</button>
                             </Link>
-                        }
+                        }{
+                        !window.location.href.includes('main') &&
+                        <Link to={'/main'}>
+                            <button>Back</button>
+                        </Link>
+                    }
 
                     </div>
                 </header>

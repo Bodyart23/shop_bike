@@ -7,15 +7,16 @@ import Create from "../Create";
 
 class MainRouter extends Component {
     goTo = (path, id) => {
-        const { history } = this.props;
-        const { pathname } = history.location;
-        if(!id){
+        const {history} = this.props;
+        const {pathname} = history.location;
+        if (!id) {
             history.push(path);
         }
         else if (pathname !== path) {
-            history.push(path+'?id='+id);
+            history.push(path + '?id=' + id);
         }
     };
+
     render() {
         return (
             <div>
@@ -30,7 +31,7 @@ class MainRouter extends Component {
                         render={() => <Product/>}
                     />
                     <Route path='/create'
-                    render ={() => <Create/>}/>
+                           render={() => <Create/>}/>
                     <Redirect to='/main'/>
                 </Switch>
             </div>
