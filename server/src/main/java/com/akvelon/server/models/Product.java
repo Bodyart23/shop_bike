@@ -10,6 +10,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 public class Product extends Entity<Integer> {
+    private  Integer ProductID;
     private String Name;
     private String ProductNumber;
     private Boolean MakeFlag;

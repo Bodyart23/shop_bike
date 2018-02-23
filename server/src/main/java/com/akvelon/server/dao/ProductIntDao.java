@@ -107,7 +107,7 @@ public class ProductIntDao extends AbsIntDao<Product> implements IproductDao {
     protected PreparedStatement createInsertStatement(Connection connection, Product value) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
         int i = 0;
-//        ps.setInt(++i, value.getId());
+
         ps.setString(++i, value.getName());
         ps.setString(++i, value.getProductNumber());
         ps.setBoolean(++i, value.getMakeFlag());
@@ -138,7 +138,7 @@ public class ProductIntDao extends AbsIntDao<Product> implements IproductDao {
     protected PreparedStatement createUpdateStatement(Connection connection, Product value) throws SQLException {
         PreparedStatement ps = connection.prepareStatement(UPDATE);
         int i = 0;
-        ps.setInt(++i, value.getId());
+        ps.setInt(++i, value.getProductID());
         ps.setString(++i, value.getName());
         ps.setString(++i, value.getProductNumber());
         ps.setBoolean(++i, value.getMakeFlag());

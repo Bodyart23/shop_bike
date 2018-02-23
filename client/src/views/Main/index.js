@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getAllBikes, getTopbike, getSearchCount} from "../../api";
+import {getAllBikes, getTopbikes, getSearchCount} from "../../api";
 import Loader from '../../components/Loader';
 import './styles.css';
 import Card from "../../components/Card";
@@ -15,7 +15,7 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        getTopbike().then(data => {
+        getTopbikes().then(data => {
             this.setState({
                 data: data,
                 loading: false

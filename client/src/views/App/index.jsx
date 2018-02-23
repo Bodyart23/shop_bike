@@ -1,17 +1,25 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './styles.css';
 import MainRouter from "../MainRouter";
+import Link from "react-router-dom/es/Link";
 
 
 class App extends Component {
 
-        render() {
+    render() {
         return (
             <div className="background">
-                <header className="header" >
-                     <div className="font">
+                <header className="header">
+                    <div className="font">
                         <h1>BEST BIKES</h1>
-                     </div>
+                        {
+                            !window.location.href.includes('create') &&
+                            <Link to={('/create')}>
+                                <button className="button-close-product">Add new</button>
+                            </Link>
+                        }
+
+                    </div>
                 </header>
                 <div>
                     <MainRouter/>
