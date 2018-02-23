@@ -80,7 +80,7 @@ class Main extends Component {
 
 
         return (
-            <div className="container-main">
+            <div className="container">
                 <div>
                     <input
                         className="rounded"
@@ -110,8 +110,8 @@ class Main extends Component {
                                     <Card el={el}/>
                                 </div>
                             )
-                        }) : <div>No data find...</div>)
-
+                        }) : <div>No data find...
+                        <button className="button">Close</button></div>)
                 }
                 </div>
                 {

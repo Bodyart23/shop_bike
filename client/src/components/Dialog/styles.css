@@ -1,5 +1,5 @@
 .dialog {
-    position: fixed;
+    position: page;
     z-index: 100;
     left: 0;
     right: 0;

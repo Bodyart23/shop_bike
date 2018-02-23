@@ -7,7 +7,7 @@ function Card({el}){
             <div className="card">
                 <Link to={('/product?id=' + el.id)}>
                     <div>
-                        <img src={'data:image/gif;base64,' + el.productPhotos[0].largePhoto} alt={el.name} />
+                        {/*<img src={'data:image/gif;base64,' + el.productPhotos[0].largePhoto} alt={el.name} />*/}
                     </div>
                     <div>
                         <a className="font-card"> <span>{el.name}</span></a>
